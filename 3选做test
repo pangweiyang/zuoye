@@ -1,0 +1,34 @@
+#include "pch.h"
+int test(int a, int c,int n)
+{
+ 
+ if (c && n != 3)
+  return 3 - n;
+ else if (a && n != 3)
+  return 3 - n;
+ else if (c && n != 4)
+  return 4 - n;
+ else if (a&& n != 2)
+  return 2 - n;
+ else if (c && n != 5)
+  return 5 - n;
+ else if (c&& n != 2)
+  return 2- n;
+ else if (a && n != 4)
+  return 4 - n;
+ else if (a && n != 5)
+  return 5 - n;
+ else if (c && n != 6)
+  return 6 - n;
+ else if (a && n != 1)
+  return 1 - n;
+}
+
+TEST(TestCaseName, TestName) {
+  EXPECT_EQ(test(5,6,1), 2);
+  EXPECT_EQ(test(4 ,6, 3), 1);
+  EXPECT_EQ(test(2, 3, 1), 2);
+  EXPECT_EQ(test(7, 6, 8), -5);
+
+
+}
