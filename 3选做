@@ -1,0 +1,164 @@
+#include <stdio.h>
+
+int main(void)
+{
+
+	
+	int a[6] = { 0 };
+	int b[6] = { 0 };
+	int c[6] = { 0 };
+	int x = 0;
+	int n = 1;
+	int m = 1;
+	int M, J, I;
+	int i, j, k = 0, K = 0;
+	int z = 1;
+	int max = 1, min = 1;
+	for (;;) {
+		while (x == 1) {	
+			n = n + x;
+			printf("电梯上升到%d层\n", n);
+			printf("哪一层有人按上\t哪一层有人按下\n");
+			scanf_s("%d%d", &I, &J);
+			a[I] = 1; c[J] = 1;
+			if (b[n] || a[n]) {
+				printf("电梯停在%d层\n", n);
+				printf("你要去哪一层?\n");
+				scanf_s("%d", &M);
+				if (M <= 6 && M >= 0) {
+					b[M] = 1;
+				}
+				b[n] = 0;
+				a[n] = 0;
+			}
+			for (j = 6; j > 0; j--) {
+				if (b[j]) {
+					m = j;
+					printf("目标楼层%d\n", m);
+					j = -1;
+				}
+			}
+			if (m - n < 0)
+				x = -1;
+			if (m - n > 0) {
+				x = 1;
+				printf("xx");
+			}
+			if (n == 6 || m == n)
+				x = 0;
+			else
+				x = 0;
+		}
+
+
+
+		while (x == -1) {
+			n = n + x;
+			printf("电梯下降到%d层\n", n);
+			printf("哪一层有人按上\t哪一层有人按下\n");
+			scanf_s("%d%d", &I, &J);
+			a[I] = 1; c[J] = 1;
+			if (b[n] || c[n]) {
+				printf("电梯停在%d层\n", n);
+				printf("你要去哪一层?\n");
+				scanf_s("%d", &M);
+				if (M <= 6 && M >= 0) {
+					b[M] = 1;
+				}
+				b[n] = 0;
+				c[n] = 0;
+			}
+			for (j = 0; j > 6; j++) {
+				if (b[j]) {
+					m = j;
+					printf("目标楼层%d\n", m);
+					j = 7;
+				}
+			}
+			if (m - n < 0)
+				x = -1;
+			if (m - n > 0) {
+				x = 1;
+				printf("yy");
+			}
+			if (n == 6 || m == n)
+				x = 0;
+			else
+				x = 0;
+		}
+
+
+
+		while (x == 0) {
+			if (c[3] && n != 3)
+				x = (3 - n);
+			else if (a[3] && n != 3)
+				x = (3 - n);
+			else if (c[4] && n != 4)
+				x = (4 - n);
+			else if (a[2] && n != 2)
+				x = (2 - n);
+			else if (c[5] && n != 5)
+				x = (5 - n);
+			else if (c[2] && n != 2)
+				x = (2 - n);
+			else if (a[4] && n != 4)
+				x = (4 - n);
+			else if (a[5] && n != 5)
+				x = (5 - n);
+			else if (c[6] && n != 6)
+				x = (6 - n);
+			else if (a[1] && n != 1)
+				x = (1 - n);
+			else {
+				printf("几楼有人要上楼?\t几楼有人要下楼?\n");
+				scanf_s("%d%d", &I, &J);
+				while (I >= 6 || I <= 0 || J > 6 || J <= 1) {
+					printf("请重新输入:\n");
+					scanf_s("%d%d", &I, &J);
+				}
+				a[I] = 1;
+				c[J] = 1;
+				if ((I + J) > 2 * n) {
+					m = I;
+					printf("目标楼层%d\t当前楼层%d\t此时上行\n", m, n);
+					if (a[n] == 1) {
+						printf("电梯停在%d层\n", n);
+						a[n] = 0;
+					}
+					else
+						x = 1;
+				}
+				if ((I + J) < 2 * n) {
+					m = J;
+					printf("目标楼层%d\t当前楼层%d\t此时下降\n", m, n);
+					if (b[n] == 1) {
+						printf("电梯停在%d层\n", n);
+						c[n] = 0;
+					}
+					else
+						x = -1;
+				}
+				if (I == n || J == n) {
+					printf("你要去哪一层?\n");
+					scanf_s("%d", &M);
+					m = M;
+					if (m > n) {
+						printf("目标楼层%d\t当前楼层%d\t此时上行\n", m, n);
+						a[n] = 0;
+						x = 1;
+					}
+					if (m < n) {
+						printf("目标楼层%d\t当前楼层%d\t此时下降\n", m, n);
+						c[n] = 0;
+						x = -1;
+					}
+				}
+			}
+			if (x > 0)
+				x = 1;
+			if (x < 0)
+				x = -1;
+		}
+	}
+}
